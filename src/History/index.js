@@ -1,88 +1,110 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, Text, Image } from 'react-native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {View, StyleSheet, Dimensions, Text, Image} from 'react-native';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+// import AllSaved from '../AllSaved';
+// import PlaceSaved from '../PlaceSaved';
+// import PostsSaved from '../PostsSaved';
 
-const FirstRoute = () => (
-  <View style={[styles.scene,styles.FirstRouteStyle, { backgroundColor: 'silver', flex: 1, alignItems: 'center' }]}>
-    <Image style={{ width: 200, height: 200, marginTop: 200 }} source={{ uri: "https://i.imgur.com/o7YgSuE.png" }}></Image>
-    <View style={{ backgroundColor: 'black', borderRadius: 30, marginTop: 5, padding: 10 }}>
-      <Text style={{ color: 'white', fontSize: 15 }}>Vui lòng đăng nhập để tiếp tục</Text>
+const AllSaved_ = () => {
+  return (
+      <View style={styles.containTab}>
+          <Image style={styles.image} source={{ uri: 'https://zalo-file-dl3.zdn.vn/4220d45a860669583017/5146275568849760138' }}></Image>
+      </View>
+  )
+  
+}
+const PlaceSaved_ = () => {
+  return (
+    <View style={styles.containTab}>
+        <Image style={styles.image} source={{ uri: 'https://zalo-file-dl3.zdn.vn/4220d45a860669583017/5146275568849760138' }}></Image>
     </View>
-  </View>
+)
+}
 
-);
-const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: 'silver', flex: 1, alignItems: 'center' }]}>
-    <Image style={{ width: 200, height: 200, marginTop: 200 }} source={{ uri: "https://i.imgur.com/o7YgSuE.png" }}></Image>
-    <View style={{ backgroundColor: 'black', borderRadius: 30, marginTop: 5, padding: 10 }}>
-      <Text style={{ color: 'white', fontSize: 15 }}>Vui lòng đăng nhập để tiếp tục</Text>
-    </View>
-  </View>
+const initialLayout = {width: Dimensions.get('window').width};
 
-);
-const ThirdRoute = () => (
-  <View style={[styles.scene, { backgroundColor: 'silver', flex: 1, alignItems: 'center' }]}>
-    <Image style={{ width: 200, height: 200, marginTop: 200 }} source={{ uri: "https://i.imgur.com/o7YgSuE.png" }}></Image>
-    <View style={{ backgroundColor: 'black', borderRadius: 30, marginTop: 5, padding: 10 }}>
-      <Text style={{ color: 'white', fontSize: 15 }}>Vui lòng đăng nhập để tiếp tục</Text>
-    </View>
-  </View>
-
-);
-const FourRoute = () => (
-  <View style={[styles.scene, { backgroundColor: 'silver', flex: 1, alignItems: 'center' }]}>
-    <Image style={{ width: 200, height: 200, marginTop: 200 }} source={{ uri: "https://i.imgur.com/o7YgSuE.png" }}></Image>
-    <View style={{ backgroundColor: 'black', borderRadius: 30, marginTop: 5, padding: 10 }}>
-      <Text style={{ color: 'white', fontSize: 15 }}>Vui lòng đăng nhập để tiếp tục</Text>
-    </View>
-  </View>
-
-);
-
-const initialLayout = { width: Dimensions.get('window').width };
-
-export default function TabViewExample() {
+export default function Saved() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'Tất cả' , tabStyle: { backgroundColor: '#fff' } },
-    { key: 'second', title: 'Địa Điểm' },
-    { key: 'third', title: 'Hình ảnh' },
-    { key: 'four', title: 'Bài viết' },
+    {key: 'first', title: 'Đang đến'},
+    {key: 'second', title: 'Lịch sử'},
+  
   ]);
 
   const renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
-    third: ThirdRoute,
-    four: FourRoute,
+    first: AllSaved_,
+    second: PlaceSaved_,
+
   });
 
-
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ backgroundColor: 'red', flexDirection: 'row' }}>
-        <View style={{ marginLeft:160}}>
-          <Text style={{ paddingHorizontal: 10, color: '#fff', marginVertical: 5, fontSize: 25, }}>Đã lưu</Text>
+    <View style={{flex: 1}}>
+      <View
+        style={{
+          backgroundColor: '#820000',
+          paddingVertical: 5,
+          paddingHorizontal: 10,
+        }}>
+        <View>
+          <Text
+            style={{
+              paddingHorizontal: 10,
+              textAlign: 'center',
+              color: '#fff',
+              marginVertical: 5,
+              fontSize: 20,
+            }}>
+            Đã lưu
+          </Text>
         </View>
-        <View style={{ marginLeft:145, marginVertical: 10}}>
-          <FontAwesome5 name="search" size={30} color="#fff" />
+        <View style={{position: 'absolute', top: 12, right: 10}}>
+          <EvilIcons name="search" size={30} color="#fff" />
         </View>
       </View>
       <TabView
-        navigationState={{ index, routes }}
+        navigationState={{index, routes}}
         renderScene={renderScene}
         onIndexChange={setIndex}
+        renderTabBar={renderTabBar}
         initialLayout={initialLayout}
       />
     </View>
   );
 }
 
+const renderTabBar = (props) => (
+  <TabBar
+    {...props}
+    indicatorStyle={{backgroundColor: 'white'}}
+    style={{backgroundColor: '#000'}}
+  />
+);
+
+
+
+// function GoHistory(props) {
+//   return (
+//       <View style={styles.containTab}>
+//           <Image style={styles.image} source={{ uri: 'https://zalo-file-dl3.zdn.vn/4220d45a860669583017/5146275568849760138' }}></Image>
+//       </View>
+//   )
+// }
+
+
+// export default GoHistory
+
 const styles = StyleSheet.create({
-  scene: {
-    flex: 1,
-  },
-  FirstRouteStyle: {
-    backgroundColor: '#fff'},
-  });
+    containTab : {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
+    image: {
+        width: '100%',
+        height: 200,
+        resizeMode: 'contain',
+        borderRadius: 5
+    },
+})

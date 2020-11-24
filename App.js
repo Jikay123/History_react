@@ -8,11 +8,12 @@
 
 import React from 'react';
 import Profile from './src/Profile';
-
+import History from './src/History/index';
 const App = () => {
   return (
     <>
-      <Profile></Profile>
+      {/* <Profile></Profile> */}
+      <History></History>
     </>
   );
 };
